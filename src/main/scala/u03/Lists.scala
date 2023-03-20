@@ -1,5 +1,7 @@
 package u03
 
+import u02.Optionals.Option
+
 object Lists extends App :
 
   // A generic linkedlist
@@ -21,6 +23,17 @@ object Lists extends App :
       case Cons(h, t) if pred(h) => Cons(h, filter(t)(pred))
       case Cons(_, t) => filter(t)(pred)
       case Nil() => Nil()
+
+    def drop[A](l: List[A], n: Integer): List[A] = (l, n) match
+      case (Nil(), _) => Nil()
+      case (l, 0) => l
+      case (Cons(h, t), l) => drop(t, l-1)
+
+    def append[A](left: List[A], right: List[A]): List[A] = left match
+      case Nil() => right
+      case Cons(h, t) => Cons(h, append(t, right))
+
+    def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] = ???
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60
