@@ -6,6 +6,7 @@ import Lists.*
 
 class ListTest:
   import List.*
+  import u02.Optionals.*
 
   val l: List[Int] = Cons(10, Cons(20, Cons(30, Nil())))
 
@@ -35,3 +36,15 @@ class ListTest:
     assertEquals(Cons(11, Cons(21, Cons(31, Nil()))), flatMap(l)(v => Cons(v + 1, Nil())))
     assertEquals(Cons(11, Cons(12, Cons(21, Cons(22, Cons(31, Cons(32, Nil ())))))), flatMap(l)(v => Cons(v + 1, Cons(v + 2, Nil()))))
 
+  @Test def max() =
+    assertEquals(Option.Some(25), List.max(Cons(10, Cons(25, Cons(20, Nil())))))
+    assertEquals(Option.Some(-1), List.max(Cons(-3, Cons(-15, Cons(-1, Nil())))))
+    assertEquals(Option.None(), List.max(Nil()))
+
+  @Test def foldLeft() =
+    val lst = Cons(3, Cons(7, Cons(1 ,Cons(5 ,Nil()))))
+    assertEquals(-16, List.foldLeft(lst)(0)(_ - _))
+
+  @Test def foldRight() =
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
+    assertEquals(-8, List.foldRight(lst)(0)(_ - _))
