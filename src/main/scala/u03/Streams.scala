@@ -34,6 +34,12 @@ object Streams extends App :
       case (Cons(head, tail), n) if n > 0 => cons(head(), take(tail())(n - 1))
       case _ => Empty()
 
+    def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
+      case (Cons(_, tail), n) if n > 0 => drop(tail())(n - 1)
+      case (Cons(head, tail), 0) => cons(head(), tail())
+      case _ => Empty()
+
+
     def iterate[A](init: => A)(next: A => A): Stream[A] =
       cons(init, iterate(next(init))(next))
 
