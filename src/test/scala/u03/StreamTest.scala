@@ -23,3 +23,6 @@ class StreamTest extends LambdaTest:
 
   @Test def testCons() =
     assertEquals(Cons(0, Cons(0, Cons(0, Cons(0, Cons(0, Nil()))))), Stream.toList(Stream.take(Stream.constant(0))(5)))
+
+  @Test def fibs() =
+    assertEquals(Cons(0, Cons(1, Cons(1, Cons(2, Cons(3, Cons(5, Cons(8, Cons(13,Nil())))))))), Stream.toList(Stream.take(Stream.fibs())(8)))
