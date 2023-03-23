@@ -39,6 +39,7 @@ object Streams extends App :
       case (Cons(head, tail), 0) => cons(head(), tail())
       case _ => Empty()
 
+    def constant[A](v: A): Stream[A] = cons(v, constant(v))
 
     def iterate[A](init: => A)(next: A => A): Stream[A] =
       cons(init, iterate(next(init))(next))
