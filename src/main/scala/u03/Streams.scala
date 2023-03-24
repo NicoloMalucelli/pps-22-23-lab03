@@ -44,9 +44,7 @@ object Streams extends App :
     def iterate[A](init: => A)(next: A => A): Stream[A] =
       cons(init, iterate(next(init))(next))
 
-    def fibs(): Stream[Int] = internalFibs(0)(1)
-
-    private def internalFibs(v1: Int)(v2: Int): Stream[Int] = cons(v1, internalFibs(v2)(v1+v2))
+    def iterateOverTwo[A](v1: A)(v2: A)(f: (A, A) => A): Stream[A] = cons(v1, iterateOverTwo(v2)(f(v1, v2))(f))
 
   end Stream
 
