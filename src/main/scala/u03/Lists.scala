@@ -43,14 +43,6 @@ object Lists extends App :
           case (v1, v2) if v1 >= v2 => Option.Some(v1)
           case (_, v2) => Option.Some(v2)
 
-    def foldLeft[A](l: List[A])(foldOver: A)(f: (A, A) => A): A = l match
-      case Nil() => foldOver
-      case Cons(h, t) => f(foldLeft(t)(foldOver)(f), h)
-
-    def foldRight[A](l: List[A])(foldOver: A)(f: (A, A) => A): A = l match
-      case Nil() => foldOver
-      case Cons(h, t) => f(h, foldRight(t)(foldOver)(f))
-
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60
 
